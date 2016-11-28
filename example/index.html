@@ -1,0 +1,43 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <section id="mapping" mouseTracker="mappingSection" style="border: 2px solid blue">
+            <h1>Secion 1</h1>
+            <div style="background-color:red">
+                <h1 mouseTracker="helloWorldTitle"  style="width:50px;" >Hello World</h1>
+            </div>
+        </section>
+        <section style=" border: 2px solid black">
+            <h1> This div is not analized</h1>
+        </section>
+        <section id="footer" mouseTracker="footerSection" style="border: 2px solid green">
+            <h2> Footer section</h2>
+            <h3> subtitle</h3>
+        </section>
+    </body>
+    <script src="../lib/mouseTracker.min.js"></script>
+    <script>
+        var mouseTracker= new mouseTracker();
+        // page creation
+        var indexPage = mouseTracker.createPage('Index.html');
+        
+        // containers creation
+        var wrapper1 = mouseTracker.createAnalysisWrapper(indexPage,'mapping');
+        var wrapper2 = mouseTracker.createAnalysisWrapper(indexPage,'footer');
+        
+        // add listeners to containers
+        mouseTracker.addAllListeners(wrapper1);
+        mouseTracker.addListener(wrapper2, 'mouseMovement');
+        
+        window.setInterval(function(){
+            //Retrieve data
+            console.log('wrapper1');
+            console.log(mouseTracker.getMouseEvents(indexPage, false, wrapper1));
+            
+            console.log('wrapper2');
+            console.log(mouseTracker.getMouseMovementEvents(indexPage, false, wrapper2));
+        }, 5000); // Retrieve data each five seconds;
+    </script>
+</html>
